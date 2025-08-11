@@ -2,17 +2,17 @@ import re
 from playwright.sync_api import Page, expect
 
 
-def test_main_category_links(page: Page):
+def test_categories_links(page: Page):
     """
     Test that the main category links are present and lead to the correct pages.
     """
     page.goto("https://www.leyven.com.ua/")
 
-    links = [
-        "Годування",
-        "Здоров'я",
-        "Іграшки",
-        "Амуніція"
+    categories_links = [
+                        "Годування",
+                        "Здоров'я",
+                        "Іграшки",
+                        "Амуніція"
     ]
 
     page_titles = [
@@ -23,9 +23,9 @@ def test_main_category_links(page: Page):
     ]
 
 
-    for i in range(len(links)):
+    for i in range(len(categories_links)):
         # Click the link.
-        page.get_by_role("link", name=links[i]).click()
+        page.get_by_role("link", name=categories_links[i]).click()
         # Expect a title "to contain" a substring.
         expect(page).to_have_title(re.compile(page_titles[i]))
         page.wait_for_timeout(2000)  # Wait for 2000 ms (2 seconds)
